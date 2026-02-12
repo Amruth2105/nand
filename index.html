@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Story</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="glow glow-1" aria-hidden="true"></div>
+    <div class="glow glow-2" aria-hidden="true"></div>
+    <div class="heart-rain" id="heart-rain" aria-hidden="true"></div>
+
+    <main class="page">
+      <section class="hero">
+        <p class="hero-kicker">Since 6 July 2021</p>
+        <h1>Every version of us has been my favorite.</h1>
+        <p class="hero-copy">
+          Nandita, I kept these memories in date order because every day with
+          you has mattered.
+        </p>
+        <a class="hero-cta" href="#timeline">Take a walk through us</a>
+      </section>
+
+      <section class="timeline" id="timeline">
+        <h2>Our timeline</h2>
+        <p class="timeline-intro">
+          From where it began to where we are now.
+        </p>
+
+        <div class="memory-grid">
+          <article class="memory">
+            <img src="the first.png" alt="The first photo from 6 July 2021" />
+            <div class="memory-content">
+              <time datetime="2021-07-06">6 July 2021</time>
+              <h3>The first</h3>
+              <p>Where our story first got real.</p>
+            </div>
+          </article>
+
+          <article class="memory">
+            <img
+              src="6th august 2021.png"
+              alt="Memory from 6 August 2021"
+            />
+            <div class="memory-content">
+              <time datetime="2021-08-06">6 August 2021</time>
+              <h3>One month in</h3>
+              <p>Already feeling like a favorite chapter.</p>
+            </div>
+          </article>
+
+          <article class="memory">
+            <img src="2nd sept 2021.png" alt="Memory from 2 September 2021" />
+            <div class="memory-content">
+              <time datetime="2021-09-02">2 September 2021</time>
+              <h3>September smiles</h3>
+              <p>Every frame looked effortless with you in it.</p>
+            </div>
+          </article>
+
+          <article class="memory">
+            <img src="20th sept 2021.png" alt="Memory from 20 September 2021" />
+            <div class="memory-content">
+              <time datetime="2021-09-20">20 September 2021</time>
+              <h3>Still us</h3>
+              <p>Comfort, chaos, and the best kind of calm.</p>
+            </div>
+          </article>
+
+          <article class="memory">
+            <img
+              src="28th december 2021.png"
+              alt="Memory from 28 December 2021"
+            />
+            <div class="memory-content">
+              <time datetime="2021-12-28">28 December 2021</time>
+              <h3>Year-end glow</h3>
+              <p>Closing the year with my favorite person.</p>
+            </div>
+          </article>
+
+          <article class="memory">
+            <img src="28th January 2022.png" alt="Memory from 28 January 2022" />
+            <div class="memory-content">
+              <time datetime="2022-01-28">28 January 2022</time>
+              <h3>January magic</h3>
+              <p>New year, same feeling: lucky to have you.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="proposal" id="proposal">
+        <div class="proposal-card">
+          <p class="proposal-lead">One more memory to make</p>
+          <h2>Nandita, will you be my Valentine?</h2>
+          <p class="proposal-copy">
+            Say yes and I will bring the playlist, the flowers, and the full
+            dramatic effort.
+          </p>
+          <p class="proposal-copy">Please respond by clicking one option below.</p>
+          <div class="proposal-actions">
+            <button class="btn btn-yes" id="yes-btn" type="button">
+              Yes, of course
+            </button>
+            <button class="btn btn-no" id="no-btn" type="button">No</button>
+          </div>
+          <p class="proposal-response" id="proposal-response" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
