@@ -109,7 +109,57 @@ function playCelebrationMusic() {
   });
 }
 
-let noMoveCount = 0;
+let noAttemptCount = 0;
+let noStartTime = null;
+const MAX_NO_ESCALATION_MS = 20000;
+const noMessageStages = [
+  [
+    "Oh... are you really sure you want to do Amruth like that?",
+    "Wait, no? Are you sure-sure?"
+  ],
+  [
+    "Still pressing no? That is a little harsh, you know.",
+    "Come on, that no button is doing too much now."
+  ],
+  [
+    "Okay this is getting personal. Amruth made all this.",
+    "You are really committed to no, huh? I am concerned."
+  ],
+  [
+    "Alright now I am getting annoyed. This is a lot of no.",
+    "No again? We are entering rude territory."
+  ],
+  [
+    "Seriously? Still no? That is wild behavior at this point.",
+    "This is peak stubborn mode. Last chance before I complain."
+  ],
+  [
+    "20 seconds of no? I am officially annoyed. Please just hit yes.",
+    "Max no energy reached. I am telling Amruth you are being dramatic."
+  ]
+];
+
+function getEscalatingNoMessage() {
+  if (noStartTime === null) {
+    noStartTime = Date.now();
+  }
+
+  const elapsed = Math.min(Date.now() - noStartTime, MAX_NO_ESCALATION_MS);
+  const stageCountBeforeMax = noMessageStages.length - 1;
+  const stageSize = MAX_NO_ESCALATION_MS / stageCountBeforeMax;
+  let stageIndex = Math.floor(elapsed / stageSize);
+
+  if (elapsed >= MAX_NO_ESCALATION_MS) {
+    stageIndex = noMessageStages.length - 1;
+  } else {
+    stageIndex = Math.min(stageIndex, noMessageStages.length - 2);
+  }
+
+  const stageMessages = noMessageStages[stageIndex];
+  const messageIndex = Math.max(0, noAttemptCount - 1) % stageMessages.length;
+  return stageMessages[messageIndex];
+}
+
 function moveNoButton() {
   const cardBounds = proposalCard.getBoundingClientRect();
   const maxX = Math.max(12, cardBounds.width - noBtn.offsetWidth - 16);
@@ -120,11 +170,8 @@ function moveNoButton() {
   noBtn.style.position = "absolute";
   noBtn.style.left = `${nextX}px`;
   noBtn.style.top = `${nextY}px`;
-  noMoveCount += 1;
-
-  if (noMoveCount >= 3 && response.textContent.length === 0) {
-    response.textContent = "That button is shy today. Try yes?";
-  }
+  noAttemptCount += 1;
+  response.textContent = getEscalatingNoMessage();
 }
 
 ["mouseenter", "touchstart"].forEach((eventName) => {
@@ -133,7 +180,6 @@ function moveNoButton() {
 
 noBtn.addEventListener("click", () => {
   moveNoButton();
-  response.textContent = "I am taking that as a maybe. Try one more time?";
 });
 
 yesBtn.addEventListener("click", () => {
