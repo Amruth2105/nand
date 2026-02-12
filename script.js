@@ -4,6 +4,7 @@ const noBtn = document.getElementById("no-btn");
 const response = document.getElementById("proposal-response");
 const heartRain = document.getElementById("heart-rain");
 const proposalCard = document.querySelector(".proposal-card");
+let audioContext;
 
 if ("IntersectionObserver" in window) {
   const observer = new IntersectionObserver(
@@ -44,6 +45,70 @@ function spawnHearts(count = 34) {
   }
 }
 
+function tone(freq, start, duration, volume = 0.07, type = "triangle") {
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+  oscillator.type = type;
+  oscillator.frequency.setValueAtTime(freq, start);
+
+  gain.gain.setValueAtTime(0.0001, start);
+  gain.gain.exponentialRampToValueAtTime(volume, start + 0.02);
+  gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+
+  oscillator.connect(gain);
+  gain.connect(audioContext.destination);
+  oscillator.start(start);
+  oscillator.stop(start + duration + 0.02);
+}
+
+function playCelebrationMusic() {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return;
+
+  if (!audioContext) {
+    audioContext = new AudioCtx();
+  }
+
+  if (audioContext.state === "suspended") {
+    audioContext.resume();
+  }
+
+  const beat = 60 / 128;
+  const start = audioContext.currentTime + 0.04;
+
+  const lead = [
+    [523.25, 0, 0.5],
+    [659.25, 0.5, 0.5],
+    [783.99, 1.0, 0.5],
+    [659.25, 1.5, 0.5],
+    [698.46, 2.0, 0.5],
+    [783.99, 2.5, 0.5],
+    [880.0, 3.0, 0.75],
+    [783.99, 3.75, 0.25],
+    [659.25, 4.0, 0.5],
+    [587.33, 4.5, 0.5],
+    [659.25, 5.0, 0.5],
+    [698.46, 5.5, 1.0]
+  ];
+
+  const bass = [
+    [130.81, 0, 1.0],
+    [164.81, 1.0, 1.0],
+    [174.61, 2.0, 1.0],
+    [196.0, 3.0, 1.0],
+    [174.61, 4.0, 1.0],
+    [164.81, 5.0, 1.0]
+  ];
+
+  lead.forEach(([freq, offset, beats]) => {
+    tone(freq, start + offset * beat, beats * beat, 0.06, "triangle");
+  });
+
+  bass.forEach(([freq, offset, beats]) => {
+    tone(freq, start + offset * beat, beats * beat, 0.045, "sine");
+  });
+}
+
 let noMoveCount = 0;
 function moveNoButton() {
   const cardBounds = proposalCard.getBoundingClientRect();
@@ -75,4 +140,5 @@ yesBtn.addEventListener("click", () => {
   document.body.classList.add("yes-celebration");
   response.textContent = "Okay, letting Amruth know.";
   spawnHearts();
+  playCelebrationMusic();
 });

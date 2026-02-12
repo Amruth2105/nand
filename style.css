@@ -190,6 +190,44 @@ h3 {
   gap: 1.2rem;
 }
 
+.project-tease {
+  margin: 1rem 0 1.5rem;
+  padding: 1.2rem 1.3rem;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 246, 234, 0.9),
+    rgba(255, 235, 221, 0.86)
+  );
+  border: 1px solid rgba(70, 36, 30, 0.2);
+  box-shadow: 0 14px 28px rgba(90, 35, 22, 0.12);
+}
+
+.project-tag {
+  margin: 0;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #7d4f43;
+}
+
+.project-tease h3 {
+  margin: 0.38rem 0 0.35rem;
+  font-size: clamp(1.35rem, 2.8vw, 1.8rem);
+}
+
+.project-tease p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.project-more {
+  margin-top: 0.4rem !important;
+  font-weight: 800;
+  color: #532c24 !important;
+}
+
 .memory {
   border-radius: 20px;
   overflow: hidden;
